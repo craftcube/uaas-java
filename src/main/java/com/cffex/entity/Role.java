@@ -1,0 +1,5 @@
+package com.cffex.entity;
+
+public enum Role {
+    ROLE_USER, ROLE_ADMIN
+}
