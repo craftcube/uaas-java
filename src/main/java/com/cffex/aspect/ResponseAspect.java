@@ -50,9 +50,8 @@ public class ResponseAspect {
         ResponseResult result = new ResponseResult();
 
         try {
-            Object obj = joinPoint.proceed(joinPoint.getArgs());
+            result = (ResponseResult)joinPoint.proceed(joinPoint.getArgs());
             response.setHeader(ERROR_HEADER, ERROR_CODE_SUCCESS);
-            result.setData(obj);
         } catch (PermissionException e) {
             response.setHeader("error_code", e.getErrorCode() + "");
             result.setErrorMsg(e.getErrorMsg());
@@ -62,6 +61,7 @@ public class ResponseAspect {
             result.setErrorMsg(e.getErrorMsg());
             result = e.getResponseResult();
         } catch (Exception e) {
+            logger.error(e.getMessage(),e);
             response.setHeader("error_code", "500");
             result.setErrorMsg(context.getMessage("server.error", new Object[]{}, Locale.SIMPLIFIED_CHINESE));
         }

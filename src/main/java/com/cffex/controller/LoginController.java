@@ -42,7 +42,7 @@ public class LoginController {
     Integer maxPerPage=5000;
 
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST,  consumes = MediaType.APPLICATION_JSON_VALUE, produces="application/json;charset=UTF-8")
+    @RequestMapping(value = "/signup", method = RequestMethod.POST,  consumes = MediaType.APPLICATION_JSON_VALUE, produces="application/json;charset=UTF-8")
     public ResponseResult register(@RequestBody RegisterVo data, HttpServletRequest request,HttpServletResponse response) {
         ResponseResult result= new ResponseResult();
         validateEntity(data);
