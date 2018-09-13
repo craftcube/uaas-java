@@ -6,6 +6,13 @@ node {
 
         checkout scm
     }
+    stage('SonarQube analysis') {
+        def sonarqubeScannerHome = tool name: 'SonarQubeScanner'
+
+        withSonarQubeEnv('SonarQube') {
+            sh "${sonarqubeScannerHome}/bin/sonar-scanner"
+        }
+    }
     stage('Build UI') {
         docker.image('docker.registry/maven:3.5-alpine').inside('-v $HOME/.m2:/root/.m2') {
             sh 'mvn clean compile package spring-boot:repackage -U '
