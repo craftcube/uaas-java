@@ -63,11 +63,11 @@
         </dependency>
 
         <!-- For MySQL -->
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.40</version>
-            <scope>runtime</scope>
+            <version>8.0.13</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
         <dependency>
@@ -144,11 +144,11 @@
                         </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <systemPropertyVariables>
-                        <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
-                    </systemPropertyVariables>
-                </configuration>
+                <!--<configuration>-->
+                    <!--<systemPropertyVariables>-->
+                        <!--<jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>-->
+                    <!--</systemPropertyVariables>-->
+                <!--</configuration>-->
             </plugin>
         </plugins>
     </build>
