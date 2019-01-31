@@ -15,6 +15,7 @@
     </parent>
 
     <properties>
+        <java.version>1.8</java.version>
         <slf4j.version>1.7.21</slf4j.version>
         <perf4j.version>0.9.16</perf4j.version>
         <jacoco.version>0.8.2</jacoco.version>
@@ -102,6 +103,17 @@
     </dependencies>
     <build>
         <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
             <!-- Package as an executable jar/war -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
