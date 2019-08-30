@@ -14,7 +14,7 @@ node {
         }
     }
     stage('Build UI') {
-        docker.image('docker.registry/maven:3.5-alpine').inside('-v $HOME/.m2:/root/.m2') {
+        docker.image('docker.sense.io/mvn-jdk8:3.6.1').inside('-v $HOME/.m2:/root/.m2') {
             sh 'mvn clean compile package spring-boot:repackage -U '
         }
     }
@@ -23,13 +23,13 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-        app = docker.build('docker.registry/uaas-java')
+        app = docker.build('docker.sense.io/uaas-java')
     }
 
     stage('Push image') {
         /* Finally, we'll push the image into Docker Hub */
 
-        docker.withRegistry('http://docker.registry', 'docker-registry-credentials') {
+        docker.withRegistry('http://docker.sense.io', 'docker.sense.io-credentials') {
             app.push("latest")
         }
     }
