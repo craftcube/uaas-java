@@ -6,6 +6,13 @@ node {
 
         checkout scm
     }
+
+    stage('Build UI') {
+        docker.image('docker.sense.io/mvn-jdk8:3.6.1').inside('-v $HOME/.m2:/root/.m2') {
+            sh 'mvn clean compile package spring-boot:repackage -U '
+        }
+    }
+
     stage('SonarQube analysis') {
         def sonarqubeScannerHome = tool name: 'SonarQubeScanner'
 
@@ -13,11 +20,7 @@ node {
             sh "${sonarqubeScannerHome}/bin/sonar-scanner"
         }
     }
-    stage('Build UI') {
-        docker.image('docker.sense.io/mvn-jdk8:3.6.1').inside('-v $HOME/.m2:/root/.m2') {
-            sh 'mvn clean compile package spring-boot:repackage -U '
-        }
-    }
+
 
     stage('Build image') {
         /* This builds the actual image; synonymous to
